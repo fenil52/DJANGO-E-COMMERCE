@@ -1,0 +1,268 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+
+
+<!-- ============ BOOTSTRAP SCROLLBAR PRODUCT VIEW  ============= -->
+
+
+ <div class="row product-view-row p-md-5 mx-auto justify-content-evenly" id="product-detail-main">
+
+
+   <!-- First Column -->
+  <div class="col-md-1">
+    <div id="list-example" class="list-group mt-2 bg-transparent border-0 rounded-0">
+
+      <a href=""  class="border-0 rounded-0 product-a">
+        <img src="{{best_pro_view.product_img.url}}" alt="" class="f-img list-group-item-action border-0 p-0">
+      </a>
+
+
+      {% if best_pro_view.extra_img1 %}
+      <a href=""  class="border-0 product-a">
+        <img src="{{best_pro_view.extra_img1.url}}" alt="" class="f-img list-group-item-action border-0 p-0">
+      </a>
+      {% endif %}
+
+
+        {% if best_pro_view.extra_img2 %}
+      <a href=""  class="border-0 product-a">
+        <img src="{{best_pro_view.extra_img2}}" alt="" class="f-img list-group-item-action border-0 p-0">
+      </a>
+      {% endif %}
+
+      {% if best_pro_view.extra_img3 %}
+      <a href=""  class="border-0 product-a">
+        <img src="{{best_pro_view.extra_img3}}" alt="" class="f-img list-group-item-action border-0 p-0">
+      </a>
+      {% endif %}
+
+    </div>
+  </div>
+
+
+ 
+  <!-- Second Column -->
+  <div class="col-md-4 second-column-productview">
+    <div class="scrollspy-example">
+    
+      <div class="col-md-4">
+        <article class="pb-3"> <img src="{{best_pro_view.product_img.url}}" id="img1" alt="" class="product-img"></article>
+        {% if best_pro_view.extra_img1 %}
+        <article class="pb-3"> <img src="{{best_pro_view.extra_img1.url}}"  id="img2" alt="" class="product-img"></article>
+        {% endif %}
+
+        {% if best_pro_view.extra_img2 %}
+        <article class="pb-3"><img src="{{best_pro_view.extra_img2.url}}" id="img3" alt="" class="product-img"></article>
+        {% endif %}
+
+        {% if best_pro_view.extra_img3 %}
+        <article class="pb-3"> <img src="{{best_pro_view.extra_img3.url}}" id="img4" alt="" class="product-img"></article>
+        {% endif %}
+      
+      </div>
+
+     
+    </div>
+  </div>
+
+
+
+  <div class="col-md-3 text-start  mt-md-3">
+    <h2 class="product-name">{{best_pro_view.product_name}}</h2>
+   
+    <div class="text-div-best m-0 p-0">
+     <div class="d-flex  gap-1 align-items-center mt-3">
+       <img
+         src="{% static 'images/star.png' %}"
+         alt=""
+         class="star-img product-view-star-img"
+       />
+       <p class="m-0 p-0 review product-review-text mt-1">14 reviews</p>
+     </div>
+     <p class="best-price product-view-price p-md-0 m-md-0 mt-md-2">RS.  {{ best_pro_view.product_price|stringformat:"03d"|slice:":2" }},{{ best_pro_view.product_price|stringformat:"03d"|slice:"2:" }}</p>
+   </div>
+
+   
+   <div class="month-quantity justify-content-between mt-4">
+     <a
+       href="#"
+       class="btn text-decoration-none btn-transparent rounded-0 minus"
+     >
+       <i class="bi bi-dash"></i>
+     </a>
+
+     <input
+       type="text"
+       pattern="[0-9]*"
+       value="1"
+       name="quantity"
+       class="quantity-input m-0 p-0 border-0"
+     />
+
+     <a
+       href="#"
+       class="btn text-decoration-none btn-transparent rounded-0 plus"
+     >
+       <i class="bi bi-plus-lg"></i>
+     </a>
+   </div>
+
+   <div class="group mt-3">
+     <button class="btn-lg w-100 rounded-0 best-btn bg-black month-btn">
+       ADD TO CART
+     </button>
+
+     <br />
+
+     <button class="btn-lg w-100 rounded-0 best-btn bg-black month-btn">
+       BUY NOW
+     </button>
+   </div>
+
+
+   <p class="product-view-description mt-3">
+        {{best_pro_view.product_details}}
+   </p>
+
+   <div class="share d-flex align-items-center gap-2">
+     <p class="product-view-share mb-1">SHARE</p>
+     <div class="icons-share">
+       <box-icon name='instagram' class="insta" type='logo' color="#a43e3e"></box-icon>
+       <box-icon name='whatsapp' type='logo' class="wp" color="#a43e3e"></box-icon>
+     </div>
+   </div>
+
+   </div>
+
+
+
+</div>
+
+<!-- ============ PRODUCT VIEW ONLY MOBILE AND TAB SCREEN  ============= -->
+
+
+  <!-- ============ RETURN AND REFUND ================ -->
+
+  <div class="container return-container">
+    <div class="row">
+      <div class="col-md-7">
+    
+    
+        <div class="accordion">
+          <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion()">
+                  <p class="return-text m-0 p-0">Return & Refund Policy</p>
+                  <a class="icon text-black d-flex flex-column  justify-content-center align-items-center">
+                      <div class="bars acc-icon bar1"></div>
+                      <div class="bars acc-icon bar2" id="bar2"></div>
+                  </a>
+              </div>
+              <div class="accordion-content">
+                  <p class="return-p">Our shipping, returns & exchange policies have Not Available.</p>
+                <article class="span-pro">The published prices include</article class="span-pro">
+                  <ul class="m-0 pp-0 list-unstyled return-ul">
+                    <li><a href="" class="text-decoration-none text-secondary">Shipping pan India</a></li>
+                    <li><a href="" class="text-decoration-none text-secondary">GST</a></li>
+                    <li><a href="" class="text-decoration-none text-secondary">Any offers on sale items</a></li>
+                    <li><a href="" class="text-decoration-none text-secondary">We assure no hidden costs</a></li>
+                  </ul>
+  
+                  <article class="span-pro">Returns</article>
+  
+                  <p class="py-3">We strive for perfection, but in the unlikely event a product reaches you damaged, scratched or just not up to the mark, we will offer a full refund WITHIN 7 days of the product delivery.
+  
+                    You can email us with your concern on hello@tsara.in</p>
+  
+              </div>
+          </div>
+      </div>
+      
+    
+        
+      </div>
+     </div>
+  </div>
+
+
+
+<script>
+ 
+ document.addEventListener('DOMContentLoaded', function () {
+  var firstColumnImages = document.querySelectorAll('.product-a');
+  var secondColumnImages = document.querySelectorAll('.second-column-productview .product-img');
+  var secondColumn = document.querySelector('.second-column-productview');
+
+  // Optional: Initialize an IntersectionObserver
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Get the index of the currently intersecting image
+        var index = Array.from(secondColumnImages).indexOf(entry.target);
+
+        // Optional: Remove 'active-img' class from all images in the first column
+        firstColumnImages.forEach(img => img.classList.remove('active-img'));
+
+        // Add 'active-img' class to the corresponding image in the first column
+        firstColumnImages[index].classList.add('active-img');
+      }
+    });
+  }, { threshold: 0.5 }); // Adjust the threshold as needed
+
+  // Optional: Observe each image in the second column
+  secondColumnImages.forEach(img => observer.observe(img));
+
+  function setActiveImageClick(index) {
+    if (index >= 0 && index < firstColumnImages.length) {
+      // Optional: Add 'active-img' class to the clicked image in the first column
+      firstColumnImages.forEach(img => img.classList.remove('active-img'));
+      firstColumnImages[index].classList.add('active-img');
+
+      // Scroll the second column to the selected image
+      secondColumnImages[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  firstColumnImages.forEach(function (img, index) {
+    img.addEventListener('click', function (event) {
+      event.preventDefault();
+      setActiveImageClick(index);
+    });
+  });
+});
+
+function toggleAccordion(element) {
+    var accordionContent = element.nextElementSibling;
+
+    accordionContent.classList.toggle('active');
+
+    var icon = element.querySelector('.icon');
+    icon.classList.toggle('rotate');
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(function(header) {
+      header.addEventListener('click', function() {
+        toggleAccordion(this);
+      });
+    });
+  });
+
+
+  </script>
+  
+
+  
+
+  
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  
+
+
+{% endblock body %}
+
+

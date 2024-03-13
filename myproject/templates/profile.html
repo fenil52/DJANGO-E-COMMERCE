@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block body %}
+
+<div class="container p-5" id="profile-container">
+    <div class="row">
+        <div class="col-md-12 mx-md-5 col-9 m-auto py-2 py-md-0">
+            <a href="/log_out" class="profile-a text-decoration-none">Logout</a>
+            <h2 class="m-md-0 py-4 profile-h2">MY ACCOUNT</h2>
+            <p class="profile-p py-2">Welcome back, {{request.user.username}}!</p>
+        </div>
+    </div>
+    <p class="order-first-p text-decoration-none ms-5">My orders</p>
+
+    <div class="row mt-5 align-items-start" id="hr">
+
+    {% if order %}
+        {% for i in order %}
+        <div class="col-md-8 d-md-flex text-center align-items-center gap-md-5 justify-content-between col-12 m-auto mb-5 mx-md-5"> 
+            <img src="{{i.product.product_img.url}}" alt="" class="order-img">
+            <p class="m-md-0 p-md-0 pro-name-order">{{i.product.product_name}}</p>
+            <p class="order-quan m-md-0 p-md-0">Quantity :{{i.quantity}}</p>
+
+            <article>{{i.status}}</article>
+        </div>
+        {% endfor %}
+
+    {% else %}
+
+        <div class="col-md-8 col-9 m-auto m-md-0 mx-md-5">
+            <p class="order-data-p my-4">You haven't placed any orders yet</p>
+        </div>
+
+    {% endif %}
+
+
+        <div class="col-md-3 col-9 mt-0 align-self-start m-md-0 m-auto">
+            <p class="order-sec-p text-decoration-none">Primary Address</p>
+            <p class="address-name py-2 pb-1">{{request.user.username}}</p>
+            <p class="address-country">India</p>
+            <a href="/addresse" class="text-decoration-none address-btn" id="address-btn">EDIT ADDRESS</a>
+        </div>
+
+    
+    </div>
+</div>
+
+<hr>
+
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            var icon;
+            if ("{{ message.tags }}" === "error") {
+                icon = "error";
+            } else if ("{{ message.tags }}" === "success") {
+                icon = "success";
+            } else {
+                icon = "info"; 
+            }
+
+            Swal.fire({
+                title: "{{ message.tags }}",
+                text: "{{ message }}",
+                icon: icon,
+            });
+
+
+            Swal.fire({
+                title: "Oops..!",
+                text: "{{ message }}",
+                icon: icon,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp animate__faster',
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutDown animate__faster',
+                },
+            });
+
+        </script>
+    {% endfor %}
+{% endif %}
+
+{% endblock body %}

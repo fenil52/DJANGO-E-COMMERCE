@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block body %}
+
+<main id="register" class="p-md-5 pt-5 p-1">
+
+    
+    <div class="container text-center">
+        <h2 class="reg-h2">Register</h2>
+        <p class="form-p my-4 mb-sm-3 reg-p">Please fill in the information below:</p>
+
+        <form method="post">
+            {% csrf_token %}
+    
+
+        <div class="input-container m-auto mt-4">
+            <input type="text" id="fname" class="text-input" autocomplete="off" name="fname" required>
+            <label for="fname" class="label">First name</label>
+        </div>
+
+        <div class="input-container m-auto my-3">
+            <input type="text" id="lname" class="text-input" autocomplete="off" name="lname"  required>
+            <label for="lname" class="label">Last name</label>
+        </div>
+
+
+        <div class="input-container m-auto my-3">
+            <input type="email" id="ma" class="text-input input-foc" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" autocomplete="off" name="mail" title="Enter a valid email address"  required>
+            <label for="ma" id="malabel" class="label">Email</label>
+        </div>
+
+
+        <div class="input-container m-auto my-3">
+            <input type="text" id="pass" class="text-input" autocomplete="off" name="pass"  required>
+            <label for="pass" class="label">Password</label>
+        </div>  
+
+        <!-- === btn ==== -->
+        <div class="btn-reg" id="btn-reg">
+            <button class="blob-btn" id="blob-btn">
+               <a href="" class="text-decoration-none a-reg">Create My Account</a>
+              <span class="blob-btn__inner">
+                <span class="blob-btn__blobs">
+                  <span class="blob-btn__blob"></span>
+                  <span class="blob-btn__blob"></span>
+                  <span class="blob-btn__blob"></span>
+                  <span class="blob-btn__blob"></span>
+                </span>
+              </span>
+            </button>
+            <br/>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svg">
+            <defs>
+              <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
+                <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
+              </filter>
+            </defs>
+          </svg>
+
+    </div>
+
+</form>
+   
+</main>
+
+
+<hr>
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            var icon;
+            if ("{{ message.tags }}" === "error") {
+                icon = "error";
+            } else if ("{{ message.tags }}" === "success") {
+                icon = "success";
+            } else {
+                icon = "info";  // Default icon for other cases
+            }
+
+            Swal.fire({
+                title: "{{ message.tags }}",
+                text: "{{ message }}",
+                icon: icon,
+            });
+
+
+            Swal.fire({
+                title: "{{ message.tags }}",
+                text: "{{ message }}",
+                icon: icon,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp animate__faster',
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutDown animate__faster',
+                },
+            });
+
+        </script>
+    {% endfor %}
+{% endif %}
+
+
+
+{% endblock body %}

@@ -1,0 +1,339 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+ 
+
+{% block body %}
+
+
+
+<!-- ============================ DROPDOWN BLOCK =============================== -->
+
+{% block dropdown %}
+<ul class="dropdown-menu rounded-0 border-0 m-0 p-0 menu-drop dropdown-ul" id="hover">
+    {% for cat_nm_all in cat %}
+          <li><a class="dropdown-item drop-down-text" href="#">{{cat_nm_all.category_name}}</a></li>
+    {% endfor %}  
+</ul>
+{% endblock dropdown %}
+
+
+{% block mobile %}
+<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+  
+  <ul class="list-unstyled m-0 p-0" id="accordion-ul">
+    {% for mobile_cat in cat %}
+    <li class="accordion-li"><a href="" class="accordion-a animate__backInLeft">{{mobile_cat.category_name}}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+            
+{% endblock mobile %}
+<!-- =============================== WEBSITE LOADER =========================== -->
+
+<div id="loader">
+  <img src="{% static 'images/logo-2.jpg' %}" alt="Loading...">
+</div>
+
+<!-- ============================================================================= -->
+
+ 
+
+    <!-- ====================== SLIDER ========================= -->
+
+    <div class="slideWiz" style="width: 100%; height: 650px"></div>
+
+    <!-- ====================== SLIDER END ========================= -->
+
+    <hr />
+
+    <!-- ====================== BEST SELLER  ========================= -->
+
+    <div class="container-fluid p-lg-5 con-best">
+      <div class="text-bestseller text-center">
+        <h2 class="best-h2">BESTSELLER</h2>
+      </div>
+    </div>
+
+    <!-- ================= BEST SELLER SLIDER ================ -->
+
+    <div class="owl-carousel-container">
+      <div class="owl-carousel mx-auto">
+
+
+        <!-- ============= product code ============== -->
+
+        {% for i in bestseller %}
+        <a href="{% url 'productview' i.slug %}" class="text-decoration-none text-dark">
+        <div class="owl-cart text-center mx-auto">
+          <img
+            src="{{i.product_img.url}}"
+            alt=""
+            class="best-img"
+          />
+
+          <div class="text-div-best text-center mx-auto">
+            <p class="best-name py-md-3 m-md-0 m-0 pb-md-2 text-uppercase">
+              {{i.product_name}}
+            </p>
+
+            <div class="d-flex justify-content-center gap-1 align-items-center py-1 py-md-0">
+              <img
+                src="{% static 'images/star.png' %}"
+                alt=""
+                class="star-img"
+              />
+              <p class="m-0 p-0 mt-1 review">14 reviews</p>
+            </div>
+            <p class="best-price p-md-0 m-md-0 mt-md-2">RS. {{i.product_price}}</p>
+
+          </div>
+
+        </div>
+        </a>
+
+        {% endfor %}
+        <!-- ============= product code End ============== -->
+
+      
+         
+      </div>
+    </div>
+
+    <div class="container-fluid text-center">
+      <button class="btn-lg rounded-0 border-0 best-btn bg-black">
+       <a href="{% url 'all_product'  %}" class="text-decoration-none bg-black m-0 p-0 border-0 text-white"> VIEW ALL PRODUCT </a>
+      </button>
+    </div>
+
+    <!-- ====================== BEST SELLER END  ========================= -->
+
+    <!-- ====================== CATEGORY START  ========================= -->
+
+    <div class="container-fluid" id="category">
+      <div
+        class="row gap-sm-0 mx-sm-auto justify-content-xl-start justify-content-sm-between justify-content-lg-center gap-xl-0 gap-lg-3 justify-content-center mx-auto mx-lg-auto"
+        id="cat-row"
+      >
+     
+      <!-- ===== category ===== -->
+      {% for ii in cat %}
+        <div class="col-md-5 col-lg-5 col-xl-4 col-sm-5 gy-sm-5">
+          <div class="category-img">
+          
+            <div class="background-image" style="
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6)),
+                url('{{ ii.category_img.url }}') !important;
+    background-repeat: no-repeat !important;
+    background-size:  cover!important;
+    transition: transform 8.5s ease;
+"></div>
+
+            
+            <div class="text-cat mt-auto">
+              <p class="company-name mt-auto mb-3">RESIN PROFESSIONAL</p>
+              <p class="cat-name mt-auto mb-4">{{ii.category_name}}</p>
+              <a href="{% url 'all_product' ii.category_name %}" class="text-decoration-none cat-a btn rounded-0"
+                >VIEW PRODUCTS</a
+              >
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+      
+      </div>
+    </div>
+
+    <!-- ===================== MOBILE-SLIDER-CATEGORY =========== -->
+
+    <div id="mobile-category-slider">
+      <div class="slideshow-mobile example-1">
+        
+        {% for iii in cat %}
+        <div>            
+            <div id="category-mobile-div">
+              <img src="{{iii.category_img.url}}" class="category-mobile-img" alt="Image 1 from http://jqueryscript.net/">
+              <div class="text_content">
+                <p class="company-name mobile-company-name mt-auto mb-3">RESIN PROFESSIONAL</p>
+                <p class="cat-name mobile-cat-name mt-auto mb-4">{{iii.category_name}}</p>
+                <a href="{% url 'all_product' iii.category_name %}" class="text-decoration-none cat-a btn rounded-0"
+                  >VIEW PRODUCTS</a
+                >
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+  
+       
+         
+        </div>
+    </div>
+
+    <!-- ====================== CATEGORY END  ========================= -->
+
+    <!-- ======================  PRODUCT OF THE MONTH  ========================= -->
+
+    <div class="container text-capitalize text-center py-sm-5">
+      <p class="text-center month-p">PRODUCT OF THE MONTH</p>
+    </div>
+
+    <div class="container mx-auto" id="month-pro">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-4 month-first-col">
+          <img
+            src="{{onemonth.month_img.url}}"
+            alt=""
+            class="month-img"
+          />
+        </div>
+
+        <div class="col-md-4 month-sec-col">
+          <p class="month-company-name">RESIN PROFESSIONAL SPECIAL</p>
+          <p class="month-pro-name pb-md-0 pb-2 pt-md-2 mb-md-1">{{onemonth.month_name}}</p>
+
+          <div
+            class="d-flex gap-1 justify-content-md-start align-items-center mt-0 pb-md-1 pt-0  month-img-group"
+          >
+            <img src="{% static 'images/star.png' %}" alt="" class="star-img" />
+            <p class="m-0 p-0 review mt-md-1">4 reviews</p>
+          </div>
+
+          <p class="month-price best-price py-2">RS.  {{onemonth.month_prcie|stringformat:"03d"|slice:":2" }},{{ onemonth.month_prcie|stringformat:"03d"|slice:"2:" }} </p>
+
+          <div class="month-quantity justify-content-between">
+            <a
+              href="#"
+              class="btn text-decoration-none btn-transparent rounded-0 minus"
+            >
+              <i class="bi bi-dash"></i>
+            </a>
+
+            <input
+              type="text"
+              pattern="[0-9]*"
+              value="1"
+              name="quantity"
+              class="quantity-input m-0 p-0 border-0"
+            />
+
+            <a
+              href="#"
+              class="btn text-decoration-none btn-transparent rounded-0 plus"
+            >
+              <i class="bi bi-plus-lg"></i>
+            </a>
+          </div>
+          <br />
+
+          <div class="group">
+
+        <form action="" class="d-inline" method="get">
+            <input type="hidden" name="prod_id" value="{{pro.id}}" id="prod_id">
+            <button type="submit" class="btn-lg rounded-0 best-btn bg-black month-btn">ADD TO CART</button>   
+             </form>
+
+            <br />
+
+            <button class="btn-lg rounded-0 best-btn bg-black month-btn">
+              BUY NOW
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================  PRODUCT OF THE MONTH END  ========================= -->
+
+    <!-- ======================= EMAIL SECTION =============================  -->
+
+
+
+    <div
+      class="container-fluid my-sm-5 mb-sm-0 py-5"
+      style="background-image: url('{{email_bg_img.email_img.url}}')"
+      id="mail"
+    >
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-5 text-center row-mail">
+          <h3 class="mail-h3">KEEP UPDATED</h3>
+
+          <h2 class="mail-h2">Newsletter</h2>
+
+          <p class="mail-p">
+            Sign up to get the latest on sales, new releases and more.
+          </p>
+
+          <div class="input-group gap-form d-flex justify-content-center">
+            <input
+              type="email"
+              class="form rounded-0 mail-input"
+              placeholder="Enter your email"
+              required
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+            />
+
+            <a
+              href=""
+              id="btn-mail"
+              class="btn text-decoration-none btn-ex one rounded-0 btn-mail my-auto"
+              >SUBSCRIBE</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!-- ======================= EMAIL SECTION END =============================  -->
+
+
+<!-- ======================= INSTAGRAM POST ======================= -->
+
+<div class="container p-md-5 p-2">
+  <h2 class="insta-h2 text-center">FOLLOW US ON INSTAGRAM</h2>
+</div>
+
+<!-- https://www.instagram.com/p/Cs_NF3tSeuN0ytAN_iynBWByA3XZMKVZ6rMQ3w0/ -->
+
+ <div class="container-fluid" id="insta">
+  
+  <div class="row">
+
+    {% for jjj in insta_im %}
+    
+    <div class="col-xl-2 col-lg-3 col-sm-3 col-6  col-md-3  p-0 text-center">
+      <div class="main-img">
+      <div class="p-img im">
+        <a href="{{jjj.insta_post_link}}" target="_parent">
+        <img class="lightboxed insta-img" rel="group1" src="{{jjj.insta_img.url}}"  alt="Image Alt"/>
+        </a>
+
+    </div>
+  <img src="{% static '/images/instagram.png' %}" class="insta-png-hover" alt="">
+  </div>
+    </div>
+
+    {% endfor %}
+
+
+
+
+
+</div>    
+</div>
+<hr class="mt-1 insta-hr">
+
+
+
+{% endblock body %}
+
+
+<!-- ====================== INSTA END ========================= -->
+
+<!-- ====================== FOOTER START ======================== -->
+
+

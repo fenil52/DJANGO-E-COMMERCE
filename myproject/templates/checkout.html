@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+
+
+
+<div class="continer mt-4 px-md-5" id="checkout">
+    <div class="row p-md-5 py-0 py-md-0">
+
+        <!-- first-col  -->
+
+        <div class="col-md-6 p-md-5 check-first-column">
+            <p class="acc-p mb-3">Account</p>
+            <p class="acc-name pb-2 mb-0">fdomadiya@gmail.com</p>
+            <a href="\log_out" class="acc-logout text-decoration-none">Log out</a>
+            <hr class="checkout-hr">
+
+            <div class="delivery">
+                <h3>Delivery</h3>
+                <div class="accordion" id="addressAccordion">
+
+
+
+
+
+                  <form action="{% url 'orders' %}" method="post" id="checkout-form">
+                    {% csrf_token %}
+                    {% if addr %}
+                        {% for address in addr %}
+                            <div class="accordion-item">
+                                <h2 class="accordion-header p-0" id="address{{ forloop.counter }}">
+                                    <div class="radio">
+                                        <input class="form-check-input address-select" type="radio" id="address{{forloop.counter}}" value="{{address.id}}" name="custid" required>
+                                    </div>
+                                    <button class="accordion-button address-accordion border-0 rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                        {{ address.fname }}
+                                    </button>
+                                </h2>
+                                <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="address{{ forloop.counter }}" data-bs-parent="#addressAccordion">
+                                    <div class="accordion-body">
+                                        <p>Address: {{ address.address }}</p>
+                                        <p>Phone: {{ address.phone }}</p>
+                                        <p>City: {{ address.city }}</p>
+                                        <p>State: {{ address.state }}</p>
+                                        <p>PIN code: {{ address.pin_code }}</p>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                        {% endfor %}
+<button type="button" class="text-decoration-none address-btn w-75 my-1" id="rzpButton">Continue</button>
+                    {% else %}
+                  
+                    
+                        <!-- Your form for adding new address -->
+                      
+                        <form action="{% url 'save_check_addr' %}" method="post">
+                          {% csrf_token %}
+                        
+                          <div class="checkout-inputfield">
+                              <input type="text" class="checkout-input" placeholder=" " name="fname" required/>
+                              <span class="checkout-span">First Name</span>
+                            </div>
+                  
+                            <div class="checkout-inputfield">
+                              <input type="text" class="checkout-input" placeholder=" " name="lname" required/>
+                              <span class="checkout-span">Last Name</span>
+                            </div>
+                        
+                            <div class="checkout-inputfield">
+                              <input type="text" class="checkout-input" placeholder=" " name="address" required/>
+                              <span class="checkout-span">Address</span>
+                            </div>
+                        
+                            <div class="checkout-inputfield">
+                              <input type="tel" class="checkout-input" placeholder=" " name="phone" minlength="10" maxlength="10" required/>
+                              <span class="checkout-span">Phone</span>
+                            </div>
+                        
+                            <div class="city-state-checkout d-flex">
+                        
+                            <div class="checkout-inputfield city-input city-state">
+                              <input type="text" class="checkout-input" placeholder=" " name="city" required/>
+                              <span class="checkout-span">City</span>
+                            </div>
+                        
+                            <div class="checkout-inputfield state-input-field city-state">
+                              <input type="text" class="checkout-input" placeholder=" " name="state" required/>
+                              <span class="checkout-span">State</span>
+                            </div>
+                        
+                            </div>
+                        
+                            <div class="checkout-inputfield">
+                              <input type="text" class="checkout-input" placeholder=" " name="zipcode" required/>
+                              <span class="checkout-span">PIN code</span>
+                            </div>
+                        
+                            <button class="text-decoration-none address-btn w-75 my-5">SAVE</button>
+                  
+                  
+                          </form>
+                  
+                    {% endif %}
+                  </form>
+
+
+
+
+
+
+                           <hr class="checkout-hr">
+                            <h3>Payment</h3>
+                            <p>All transactions are secure and encrypted.</p>
+                      
+
+                </div>
+            </div>
+        </div>
+
+        <!--  sec col -->
+        <div class="col-md-5 check-sec-column p-md-5 py-4 px-4 border-start border-2">
+              <h2 class="items-your">Your Items :</h2>
+              
+            {% for i in cart %}
+            <div class="div-check-flex d-flex align-items-center gap-3 mt-4">
+                <div class="img-group position-relative">
+                    <img src="{{i.product.product_img.url}}" alt="">
+                    <span class="position-absolute badge-number  rounded-circle  start-2 translate-middle bg-badge">
+                        {{totalnumber}}
+                    </span>
+                </div>
+                <div>
+                <p class="m-0 p-0 check-p-name">{{i.product.product_name}}</p>
+                <p class="m-0 p-0 check-p-name">RS. {{i.product.product_price}}.00</p>
+                </div>
+                <p class="check-p-price ms-auto my-0 p-0">₹ {{i.subtotal}}</p>
+            </div>
+
+            {% endfor %}
+
+              <hr>
+            <div class="shipping-checkout d-flex mt-5 mt-md-3 py-2">
+                <p class="check-ship-p m-0 p-0 pb-1">Shipping  <span class="span-que">?</span><p class="ms-auto m-0 p-0"> RS.50.00</p></p>
+            </div>
+
+            <div class="check-total-flex d-flex align-items-center">
+                <p class="check-total m-0 p-0 ">Total</p>
+                <p class="check-inr ms-auto m-0 p-0"> <span class="me-2">INR</span>₹{{total}}.00 </p>
+            </div>
+
+          
+        </div>
+    </div>
+</div>
+
+<hr class="m-0 p-0">
+
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            var icon;
+            if ("{{ message.tags }}" === "error") {
+                icon = "error";
+            } else if ("{{ message.tags }}" === "success") {
+                icon = "success";
+            } else {
+                icon = "info"; 
+            }
+
+            Swal.fire({
+                title: "{{ message.tags }}",
+                text: "{{ message }}",
+                icon: icon,
+            });
+
+
+            Swal.fire({
+                title: "Oops..!",
+                text: "{{ message }}",
+                icon: icon,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp animate__faster',
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutDown animate__faster',
+                },
+            });
+
+        </script>
+
+    {% endfor %}
+{% endif %}
+
+
+
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var rzpButton = document.getElementById('rzpButton');
+      rzpButton.addEventListener('click', function() {
+          var options = {
+            "key": "rzp_test_yKgpZE6YKOehNC",
+              "amount": 100, // Example: 100 rupees
+              "currency": "INR",
+              "name": "Your Company Name",
+              "description": "Test Transaction",
+              "image": "{% static 'images/logo-11.jpg' %}",
+              "handler": function(response) {
+                  console.log(response);
+                  document.getElementById('checkout-form').submit();
+              },
+              "prefill": {
+                  "name": "Customer Name",
+                  "email": "customer@example.com",
+                  "contact": "9999999999"
+              },
+              "notes": {
+                  "address": "Razorpay Corporate Office"
+              },
+              "theme": {
+                  "color": "#3399cc"
+              }
+          };
+          var rzp = new Razorpay(options);
+          rzp.open();
+      });
+  });
+</script>
+
+
+
+{% endblock body %}
+
+
+<!-- rzp_test_yKgpZE6YKOehNC -->
+
+
+
+
+
+
+
+
+
+
+
+

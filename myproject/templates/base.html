@@ -1,0 +1,573 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PROFESSIONAL || RESIN</title>
+
+    <!-- ======== JQUERY CDN ========= -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tTf8fBzl8cmL8tBzZvJTzQzPL5E5A9xJ46jGw=" crossorigin="anonymous"></script>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  
+    <!-- ====== MAIN CSS ======= -->
+     <!-- SweetAlert2 CSS -->
+     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css"> -->
+
+     <!-- Font Awesome CSS -->
+     <link rel="stylesheet" href="sweetalert2.min.css">
+	  <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/lightboxed.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css">
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.2/flatly/bootstrap.min.css">
+
+
+    <!-- ======= JQUERY SLIDE LINKS ======== -->
+    <script src="{% static 'js/min.js' %}"></script>
+    <script src="{% static 'js/slideWiz.js' %}"></script>
+    <script src="{% static 'js/square1.js' %}"></script>
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/swiper/swiper-bundle.min.css"
+  />
+
+    <!-- Include SweetAlert2 CSS and JS -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  
+    <!-- ========= CATEGORY OWL CAROUSEL ========= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+    
+  
+
+    <!-- ====== BOOTSTRAP CDN LINKS ======== -->
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <!-- ======== FONT AWESOME ========= -->
+
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css"
+    />
+
+  <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css"/>
+
+    <script
+      src="https://kit.fontawesome.com/2c7dd930f5.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- ====== GOOGLE FONTS ======= -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+</head>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+        const inputs = document.querySelectorAll('.text-input');
+        
+        inputs.forEach(input => {
+            input.addEventListener('input', function () {
+                input.classList.toggle('has-value', input.value !== '');
+            });
+        });
+    });
+
+function cl() {
+    var cc = document.getElementById("mobile-row");
+    cc.classList.add("translate-active");
+
+    // Apply animate class to all <a> tags inside the mobile menu, excluding the icon
+    var menuLinks = document.querySelectorAll('.mobile-ul a:not(.insta-a)');
+    menuLinks.forEach(function(link) {
+        link.classList.add('animate__backInLeft');
+        link.addEventListener('animationend', function() {
+            // Remove the animate class once animation is complete
+            link.classList.remove('animate__backInLeft');
+        }, { once: true });
+    });
+
+    // Disable body scrolling
+    document.body.style.overflow = 'hidden';
+
+    cc.addEventListener('animationend', function() {
+        cc.classList.remove('animate__backInLeft');
+    }, { once: true });
+}
+
+function rem() {
+    var clos = document.getElementById("mobile-row");
+    clos.classList.remove("translate-active");
+
+    document.body.style.overflow = 'auto';
+}
+
+</script>
+
+
+<script>
+  jQuery(document).ready(function () {
+    var swiper = new Swiper("#product-view-mobile", {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  });
+</script>
+
+
+<script>
+  jQuery('.example-2').square1({animation: 'slide'});
+    $(document).ready(function() {
+    $(".search-icon").click(function() {
+    $("#search-container").slideToggle();
+  });
+});
+
+
+jQuery(document).ready(function($) {
+    $("#filter-plus").click(function() {
+      $(".tog").slideToggle();
+        toggleIcon();
+
+    });
+
+    function toggleIcon() {
+        var icon = $("#filter-plus");
+
+        if (icon.attr("name") === "plus") {
+            icon.attr("name", "minus");
+        } else {
+            icon.attr("name", "plus");
+        }
+    }
+});
+
+
+      $(document).ready(function() {
+        
+        var filterColumn = $("#filter-column");
+        var filterColumnOffset = filterColumn.offset().top;
+
+        // Update the sticky behavior on scroll
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > filterColumnOffset) {
+                filterColumn.addClass("sticky-column");
+            } else {
+                filterColumn.removeClass("sticky-column");
+            }
+        });
+    });
+
+    // ============== LOADER JS ==================
+
+    $(window).on('load', function () {
+        $('#loader').fadeOut('slow');
+    });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const telInput = document.getElementById('ph');
+
+    telInput.addEventListener('input', function () {
+      if (telInput.value.length > 0) {
+        telInput.classList.add('has-value');
+      } else {
+        telInput.classList.remove('has-value');
+      }
+    });
+
+    telInput.addEventListener('focus', function () {
+      telInput.classList.add('edit-address-input-focus');
+    });
+
+    telInput.addEventListener('blur', function () {
+      telInput.classList.remove('edit-address-input-focus');
+    });
+  });
+
+</script>
+
+
+<!-- ================== dynamic slider code =================== -->
+{% for slider_item in main_slider %}
+<script>
+$(document).ready(function () {
+  var fileArray = [];
+
+      fileArray.push(
+          {
+              src: {
+                  cover: "{{ slider_item.img1.url }}",
+              },
+          },
+          {
+              src: {
+                  cover: "{{ slider_item.img2.url }}",
+              },
+          },
+          {
+              src: {
+                  cover: "{{ slider_item.img3.url }}",
+              },
+          }
+      );
+
+  $('.slideWiz').slideWiz({
+      auto: true,
+      speed: 5000,
+      row: 12,
+      col: 35,
+      animation: ['box3D'],
+      file: fileArray
+  });
+});
+</script>
+{% endfor %}
+
+
+
+ 
+  <body>
+    
+
+      <!-- ================== HEADER ======================== -->
+
+      <header id="header">
+        <div class="container-fluid header">
+          <div class="row align-items-center gap-md-3 header-row padding-mobile-screen">
+  
+            <div class="barsmain col-2 d-md-none ms-md-2">
+                <!-- ======= BAR ICON ======= -->
+              <i class="bi bi-list-nested bar-icon" id="bar-icon" onclick="cl()"></i>
+            </div>
+            
+            <div
+              class="col-lg-3 col-5 col-sm-4 col-md-3 mx-md-0 mx-auto me-4 ms-3 me-md-0 equal-heigh d-flex align-items-center justify-content-center gap-logo" id="logo-col"
+            >
+              <div class="logo py-md-0">
+               <a href="/"> <img src="{% static 'images/logo-11.jpg' %}" alt="" class="main-logo-img"/>
+                  </a>
+              </div>
+  
+              <!-- <div class="text">
+                <a href="/" class="text-decoration-none">
+                <h2 class="logo-h2 m-0 p-0">RESIN PROFESSIONAL</h2>
+                <p class="m-0 p-0 logo-p">Art & Decoration</p>
+                </a>
+              </div> -->
+            </div>
+  
+<!-- ========================== ul ===============================  -->
+
+        <div class="col-lg-5 col-md-5 p-0 m-0 equal-height d-md-flex align-items-center justify-content-center" id="ul-display">
+
+        <ul class="list-unstyled d-block d-md-flex m-0 p-0 gap-md-5 me-lg-5 main-ul equal-height align-items-center header-ul" id="header-ul-main">
+          <li class="li-height"><a href="">Home</a></li>
+  
+                <!-- ===== SHOP DROPDOWN ===== -->
+  
+                <li class="drop li-height">
+                  <div>
+                    <a class="gap-2 d-flex dd align-items-center">
+                      Shop
+                      <!-- <i class="fa-sharp fa-light fa-circle-arrow-down mt-1 arrow"></i>                          -->
+                      <img
+                        src="{% static '/images/arrow.png' %}"
+                        alt=""
+                        class="arrow-img mt-1"
+                      />
+                    </a>
+                    {% block dropdown %}
+
+                    {% endblock dropdown %}
+                  </div>
+                </li>
+  
+                <li class="li-height"><a href="">Contact Us</a></li>
+                {% if user.is_authenticated %}
+                <li class="li-height"><a href="/log_out">Logout</a></li>
+                {% else %}
+                <li class="li-height"><a href="/reg_page">Register</a></li>
+
+                {% endif %}
+              </ul>
+        </div>
+
+
+  
+            <div class="col-lg-2 col-2 m-md-auto equal-height d-flex align-items-center">
+              <div class="icons d-flex align-items-center">
+  
+                <box-icon
+                  name="search-alt-2"
+                  class="icon-color search-icon"
+                  id="search-icon"
+                  color="#5c5c5c"
+                ></box-icon>
+  
+                <a href="/profile">
+                <box-icon
+                  name="user"
+                  class="icon-color user-icon"
+                  color="#5c5c5c"
+                  id="user-icon"
+                ></box-icon>
+                </a>
+  
+                <box-icon
+                  name="heart"
+                  class="icon-color heart-icon"
+                  color="#5c5c5c"
+                ></box-icon>
+                
+                <a href="/cart" class="cart-link">
+                  {% if request.user.is_authenticated %}
+                  <span class="cart-count">{{totalnumber}}</span>
+                  {% endif %}
+
+                  <box-icon
+                    name="shopping-bag"
+                    class="icon-color cart-icon"
+                    color="#5c5c5c"
+                  ></box-icon>
+                </a>
+  
+                <div class="mobil-screen-icons d-flex gap-3 me-4">
+                <div class="search-div d-md-none">
+                  <i class="bi bi-search search-icon fw-bold"></i>
+                </div>
+  
+                <div class="cart-div d-md-none">
+                  <i class="bi bi-bag cart-icon fw-bold"></i>
+                </div>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+
+<!-- ==================== MOBILE HEADER ==================== -->
+
+<div class="row" id="mobile-row">
+  <div class="col-12">
+
+
+    <ul class="list-unstyled m-0 p-0 mobile-ul" id="header-ul-main">
+      <li class="ps-3">
+        <box-icon name='x' color="#575252" id="close-icon-mobile" size="32px" onclick="rem()"></box-icon>
+      </li>
+
+      <div class="menu">
+      <li class="li-mobile animate__backInLeft"><a href="" class="animate__backInLeft">Home</a></li>
+
+      <div class="accordion accordion-flush rounded-0 p-0 m-0" id="accordionFlushExample">
+        <div class="accordion-item border-0 rounded-0">
+          <h2 class="accordion-header  p-0 m-0">
+
+            <button class="accordion-button collapsed animate__backInLeft" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" id="shop-accordion">
+            SHOP 
+            </button>
+          </h2>
+
+          {% block mobile %}
+         
+          {% endblock mobile %}
+        </div>
+       
+      </div>
+
+
+      <li class="li-mobile animate__backInLeft"><a href="">Contact Us</a></li>
+      {% if user.is_authenticated %}
+      <li class="li-mobile animate__backInLeft"><a href="">Logout</a></li>
+      {% else %}
+      <li class="li-mobile animate__backInLeft"><a href="/login_page">Login</a></li>
+      <li class="li-mobile animate__backInLeft"><a href="/reg_page">Register</a></li>
+      {% endif %}
+      <li class="li-profile animate__backInLeft" id="li-profile"><a href="/login_page" class="profile" id="profile">PROFILE</a></li>
+
+      <div class="icon-section d-flex justify-content-around w-75 mx-auto">
+        <i class="fa-brands fa-instagram fa-sm" id="insta-mobile-logo"></i>
+        <i class="fa-brands fa-whatsapp fa-sm" id="whats-app"></i>
+      </div>
+
+    </ul>
+
+
+  </div>
+</div>
+
+
+
+
+      <!-- =================== HEADER END ======================== -->
+
+      {% block body %}
+
+
+
+
+
+      {% endblock body %}
+
+      <!-- ====================== FOOTER START ======================== -->
+
+<div class="container-fluid p-3 pb-5 pt-2" id="footer">
+    <div class="row p-2 justify-content-between w-100">
+        <div class="col-sm-12 col-md-6 col-xl-4 px-md-5">
+            <h6 class="pt-sm-5 pt-2 footer-h6">RESIN PROFESSIONAL</h6>
+            <div class="row pt-2">
+                <div class="col">
+                  <p class="footer-p footcolor">  Tsara is the brainchild of dynamic husband-wife duo, Tarun and Natasha Jagwani. Hailing from families that are into the jewellery business, they realised a need to cater to the ever-growing number of Indians travelling to various destinations around the world and across India for weddings and other grand events.
+                  </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-4 gap-4 d-flex">
+                    <a href=""><i class="bi bi-facebook mt-1 footcolor"></i></a>
+                    <a href=""><i class="bi bi-instagram  footcolor"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-12 col-md-6 col-xl-2 ms-md-5">
+            <h6 class="pt-5 text-start shop-footer mb-3 footer-h6">SHOP</h6>
+            <a href=""  class="footcolor all text-decoration-none">All Collection</a>
+        </div>
+  
+        <div class="col-sm-12 col-md-6 col-xl-2 pe-md-5">
+            <h6 class="pt-5 info-footer footer-h6">INFORMATION</h6>
+            <ul class="footer-ul py-2 list-unstyled">
+                <li class="p-1"><a href="" class="footcolor">Privacy Policy</a></li>
+                <li class="p-1"><a href="" class="footcolor">Return & Refund Policy</a></li>
+                <li class="p-1"><a href="" class="footcolor">Terms Of Service</a></li>
+                <li class="p-1"><a href="" class="footcolor">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-12 col-md-6 col-xl-3 d-flex flex-column ps-md-2">
+            <h6 class="pt-5 footer-h6">NEWSLETTER</h6>
+            <div class="row">
+                <div class="col mt-2">
+                    <p class="footcolor w-md-75">Subscribe to receive updates, access to exclusive deals, and more.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-2">
+                    <input type="text" placeholder="Enter your email address" class="footer-input">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-4">
+                  <a
+                  href=""
+                  id="btn-footer"
+                  class="btn text-decoration-none btn-footer rounded-0  my-auto"
+                  >SUBSCRIBE</a
+                >
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  <div class="container-fluid px-md-5">
+    <div class="row copyright ms-md-3 text-md-start text-center">
+          <p class=""> <span class="c">©</span>  <span class="span-1 ms-1">ARROWSQUARE</span> <span class="span-2">Maintained by</span>
+          <span class="span-3">Arrow</span>
+          </p> 
+  
+  </div>
+  </div>
+  
+  <!-- ========================== FOOTER END ======================== -->
+
+
+
+
+<script>
+
+</script>
+
+  
+
+  </body>

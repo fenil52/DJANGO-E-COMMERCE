@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block body %}
+
+
+<main id="form-login" class="p-md-5">
+    <div class="container form-container text-center">
+        <h2 class="form-h2">LOGIN</h2>
+        <p class="form-p my-4 mb-sm-3">Please enter your e-mail and password:</p>
+
+        <form action="" method="post" id="main-form">
+            {% csrf_token %}
+
+
+            <div class="input-container m-auto my-3">
+                <input type="email" id="ma" class="text-input input-foc" autocomplete="off" name="mail" title="Enter a valid email address" required>
+                <label for="ma" id="malabel" class="label">Email</label>
+            </div>
+            
+                
+            
+            <div class="input-container m-auto mt-4 mb-3">
+                <input type="password" id="pass" class="text-input" autocomplete="off" name="password" required>
+                <label for="pass" class="label">Password</label>
+            </div>
+
+            <a href="" class="text-decoration-none" id="a-login">Forgot Password ?</a>
+                <br>
+            <button type="submit" class="button-four first btn-log my-4 clip-path" id="forget">Login</button>
+
+            <p class="dont">Don't Have An Account ?<a href="/reg_page" class="text-decoration-none text-black">Create One</a></p>
+
+        </form>
+    </div>
+</main>
+
+<hr>
+
+
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            var icon;
+            if ("{{ message.tags }}" === "error") {
+                icon = "error";
+            } else if ("{{ message.tags }}" === "success") {
+                icon = "success";
+            } else {
+                icon = "info"; 
+            }
+
+            Swal.fire({
+                title: "{{ message.tags }}",
+                text: "{{ message }}",
+                icon: icon,
+            });
+
+
+            Swal.fire({
+                title: "Oops..!",
+                text: "{{ message }}",
+                icon: icon,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp animate__faster',
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutDown animate__faster',
+                },
+            });
+
+        </script>
+    {% endfor %}
+{% endif %}
+
+
+
+{% endblock body %}

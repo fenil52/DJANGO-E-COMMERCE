@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+
+
+
+ <!-- =================== SEARCH CODE ======================= -->
+ <div class="container-fluid p-4 ps-0 pe-0 bg-white" id="search-container">
+    <div class="row" id="slide-main">
+
+      <div class="col-sm-12 col-12 p-0 ">
+      <div class="d-flex align-items-center gap-md-3 ms-md-1 gap-2">
+      <box-icon
+      name="search-alt-2"
+      class="ms-3 ms-md-4"
+      id="search-icon-main"
+      color="#a43e3e"
+      size="28px"
+    ></box-icon>
+
+    <form action="" class="d-flex align-items-center" id="search" method="get">
+       <input type="text" placeholder="SEARCH" class="search-all border-0 rounded-0" name="search">
+       <button type="submit" class="btn text-decoration-none rounded-0 btn-search my-auto px-sm-4" id="btn-search">Go</button>
+    </form>
+
+      </div>
+      </div>
+
+
+    </div>
+  </div>
+
+<div class="container-fluid">
+    <h2 class="text-center all-pro-h1 p-sm-4 pt-xl-5">SHOP</h2>
+
+    <div class="row" id="all-products-row">
+
+     
+        <!-- ======= filter column ========== -->
+        <div class="col-md-2 px-sm-0 px-sm-3 all-pro-col" id="first-col-all">
+
+            <div class="main-cat d-flex gap-5 align-items-center">
+            <p class="filter-p m-0 p-0">Categories</p>
+
+            <box-icon name='plus' color="#827d7d" size="22px" class="me-5" id="filter-plus"></box-icon>
+            </div>
+
+                <div class="accordion tog" id="filter-name">
+
+                  {% for ii in all_data %}
+
+                    <div class="my-2">
+                               
+                  {% if ii.category_name %}
+                  <a href="{% url 'all_product' ii.category_name %}" class="all-cat-name text-decoration-none">{{ ii.category_name }} <span class="filter-span me-5 mt-1">{{ ii.product_count }}</span></a>
+                  {% endif %}
+              
+                    </div> 
+
+                  {% endfor %}
+
+
+                </div>
+                <hr id="filter-hr">
+        </div>
+
+        <!-- ====== Product Display ====== -->
+<div class="col-lg-10 col-md-12 col-12 all-pro-col">
+
+    <div class="row gy-sm-5 gy-3" id="row-sub-col">
+
+        {% if category_filter %}
+            {% for fenil in category_filter %}
+            
+                <div class="col-lg-3 col-6 col-sm-4 col-md-4 text-center">
+                    <a href="{% url 'productview' fenil.slug %}" class="text-decoration-none">
+                        <img src="{{fenil.product_img.url}}" alt="" class="all-pro-img" id="img-hover">
+                        <p class="all-pro-name py-3 mb-0 pb-2">{{fenil.product_name}}</p>
+
+                        <div class="d-flex gap-1 justify-content-center align-items-center py-0 py-md-0">
+                            <img
+                              src="{% static 'images/star.png' %}"
+                              alt=""
+                              class="star-img"
+                              id="all-pro-star"
+                            />
+                            <p class="m-0 p-0 review text-black" id="all-pro-review">14 reviews</p>
+                        </div>
+                        <p class="all-pro-price mt-2">Rs. {{fenil.product_price}}</p>
+                    </a>
+                </div>
+            {% endfor %}
+
+<!-- Pagination -->
+
+
+<div class="col-12 mt-4">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if category_filter.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="First">
+                        <span aria-hidden="true">&#x00AB;&#x00AB;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ category_filter.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&#x00AB;</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for num in category_filter.paginator.page_range %}
+                {% if num == 1 %}
+                    <li class="page-item{% if category_filter.number == num %} active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% elif num > category_filter.number|add:'-2' and num < category_filter.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% elif num == category_filter.number|add:'3' %}
+                    <li class="page-item">
+                        <span class="page-link">...</span>
+                    </li>
+                {% elif num == category_filter.paginator.num_pages %}
+                    <li class="page-item{% if category_filter.number == num %} active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if category_filter.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ category_filter.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&#x00BB;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ category_filter.paginator.num_pages }}" aria-label="Last">
+                        <span aria-hidden="true">&#x00BB;&#x00BB;</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+
+
+
+        {% else %}
+            <div class="col-12">
+                <h3 class="text-center py-5 mt-5">NO PRODUCTS CURRENTLY AVAILABLE :)</h3>
+            </div>
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+        
+    </div>
+</div>
+
+<hr>
+
+<div class="container p-5">
+    <h1 class="text-center also-like"> YOU MAY ALSO LIKE</h1>
+</div>
+
+<!-- ============== random product slider ========= -->
+<div class="owl-carousel-container">
+    <div class="owl-carousel mx-auto">
+ 
+       <!-- ============= product code ============== -->
+ 
+       {% for i in random_products %}
+       <a href="{% url 'productview' i.slug %}" class="text-decoration-none text-dark">
+          <div class="owl-cart text-center mx-auto">
+             <img src="{{ i.product_img.url }}" alt="" class="best-img" />
+ 
+             <div class="text-div-best text-center mx-auto">
+                <p class="best-name py-md-3 m-md-0 m-0 pb-md-2 text-uppercase">
+                   {{ i.product_name }}
+                </p>
+ 
+                <div class="d-flex justify-content-center gap-1 align-items-center py-1 py-md-0">
+                   <img src="{% static 'images/star.png' %}" alt="" class="star-img" />
+                   <p class="m-0 p-0 mt-1 review">14 reviews</p>
+                </div>
+                <p class="best-price p-md-0 m-md-0 mt-md-2">RS. {{ i.product_price }}</p>
+             </div>
+          </div>
+       </a>
+       {% endfor %}
+       <!-- ============= product code End ============== -->
+ 
+    </div>
+ </div>
+
+ 
+ <hr>
+
+
+{% for fenil in category_filter %}
+
+{% if fenil.extra_img1 %}
+
+<script>
+  $(document).ready(function() {
+        $("#img-hover").hover(
+            function() {
+                $(this).css({
+                    "opacity": 0,
+                    "transition": "opacity 0.5s ease-in-out"
+                });
+
+                var newSrc = "{{fenil.extra_img1.url}}";
+
+                setTimeout(() => {
+                    $(this).attr("src", newSrc).css("opacity", 1);
+                }, 100);
+            },
+            function() {
+                $(this).css({
+                    "opacity": 0,
+                    "transition": "opacity 0.5s ease-in-out"
+                });
+
+                var originalSrc = "{{fenil.product_img.url}}";
+
+                setTimeout(() => {
+                    $(this).attr("src", originalSrc).css("opacity", 1);
+                }, 100);
+            }
+        );
+    });
+</script>
+{% endif %}
+
+{% endfor %}
+
+{% endblock body %}

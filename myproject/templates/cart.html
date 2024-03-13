@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<div class="container p-md-5 pb-md-2 my-sm-5 my-md-0 my-4" id="cart-container">
+    <h2 class="cart-h2 text-center">CART</h2>
+    <p class="cart-p text-center m-0 p-0">You are eligible for shipping!</p>
+
+
+    <!-- <p class="empty-p">Your cart is empty</p>
+<Hr></Hr> -->
+
+{% if cart %}
+    <div class="row py-2 py-md-4 pb-md-2 align-items-center justify-content-evenly gy-sm-4">
+
+
+        <div class="col-lg-4 col-md-4 col-sm-4 title-cart">
+            <p class="text-center cart-heading-p">PRODUCT</p>
+        </div>
+        <div class="col-lg-5 col-md-4 col-sm-4 title-cart">
+            <p class="text-center cart-heading-p">QUANTITY</p>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-4 title-cart">
+            <p class="text-center cart-heading-p">TOTAL</p>
+        </div>
+        <hr class="cart-hr">        
+        {% for i in cart %}
+
+            <!-- col -->
+            <div class="col-lg-4 col-md-4 py-4 pb-2 py-md-0 col-7 col-sm-5  align-items-center remove-closest">
+              <a href="{% url 'productview' i.product.slug %}" class="text-decoration-none align-items-center text-dark d-flex gap-md-4  gap-3">
+
+            <img src="{{i.product.product_img.url}}" alt="" class="cart-img">            
+            <div class="cart-pro-detail">
+                <p class="cart-pro-name m-0 py-2">{{i.product.product_name}}</p>
+                <p class="cart-price">RS.   {{i.product.product_price}}</p>
+            </div>
+
+            </a>
+            </div>
+
+            <!-- col -->
+            <div class="col-lg-3 col-md-3 py-3 pb-0 py-md-0 col-4 col-sm-4 align-items-center d-flex justify-content-center flex-column">
+
+
+
+              <div class="cart-quantity mb-md-3">
+                <a class="btn text-decoration-none btn-transparent minus-cart-in-cart rounded-0 minus"
+                   id="minus-icon-cart-{{ forloop.counter }}"
+                   pid="{{ i.product.id }}">
+                    <i class="bi bi-dash minus-icon-cart"></i>
+                </a>
+            
+                <!-- <input
+                  type="text"
+                  pattern="[0-9]*"
+                  value="1"
+                  name="quantity show-quantity"
+                  class="cart-quantity-input m-0 p-0 border-0"
+                  data-product-id="{{ i.product.id }}"
+                /> -->
+            
+                <span class="cart-quantity-input m-0 p-0" id="quan{{i.product.id}}">{{ i.quantity }}</span>
+            
+                <a class="btn text-decoration-none btn-transparent rounded-0 plus plus-cart-in-cart"
+                   id="plus-icon-cart-{{ forloop.counter }}"
+                   pid="{{ i.product.id }}">
+                    <i class="bi bi-plus-lg plus-icon-cart"></i>
+                </a>
+            </div>
+            
+       
+          <p class="quantity-name-in-cart mt-2 my-md-2 qu" id="qu2{{i.product.id}}">Quantity : {{i.quantity}}</p>
+
+          <!-- <a href="" class="cart-remove-a text-center mt-0 remove-cart-item">REMOVE</a> -->
+         
+          <form action="{% url 'remove_cart' %}" method="POST" id="remove-form">
+            {% csrf_token %}
+            <input type="hidden" name="prod_id" value="{{ i.product.id }}">
+            <button type="submit" class="cart-remove-a bg-transparent border-0 text-center mt-0 remove-cart-item">REMOVE</button>
+        </form>
+        
+      
+
+
+            </div>
+
+            <div class="col-lg-2 col-md-3 col-sm-3 text-end title-cart">
+                <p class="cart-price ms-xl-3" id="subtotal{{i.product.id}}">RS.{{i.subtotal}}</p>
+            </div>
+
+            {% endfor %}
+
+
+    </div>
+
+    <hr>
+
+    <div class="total-amount ms-sm-auto ms-4 w-50 text-sm-end" id="total-amount-div">
+      <p class="total-amount-shipping">Shipping: Rs. 50</p>
+      <p class="total-amount-p" id="total">TOTAL: RS. {{total}}</p>
+      <p class="total-p">Shipping & taxes calculated at checkout</p>
+      <a href="/checkout" class="text-decoration-none address-btn checkout-btn my-3" id="address-btn">CHECKOUT</a>
+    </div>
+
+
+{% else %}    
+
+<h3 class="text-center py-5">NO ITEMS IN YOUR CART...</h3>
+
+{% endif %}
+
+
+</div>
+<hr>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+<script>
+
+
+
+$(".plus-cart-in-cart").click(function(){
+    var id = this.getAttribute("pid");
+    var ele = document.getElementById("quan" + id);
+    var qu2 = document.getElementById("qu2" + id);
+    var am = document.getElementById("subtotal" + id); // Unique subtotal ID for each product
+    var total = document.getElementById("total");
+
+    $.ajax({
+        type: 'GET',
+        url: '/plus',
+        data: {
+            prod_id: id,
+        },
+        success: function(dat) {
+            if (ele) {
+                ele.innerText = dat.quantity;
+                qu2.innerText = "Quantity :"+" "+ dat.quantity;
+            } else {
+                console.error("Quantity element not found for product ID: " + id);
+            }
+
+            if (am) {
+                am.innerText =" RS."+" "+ dat.subtotal; // Update subtotal for the specific product
+            } else {
+                console.error("Subtotal element not found.");
+            }
+
+            if (total) {
+                total.innerText = "RS ."+" "+ dat.total;
+            } else {
+                console.error("Total element not found.");
+            }
+        }
+    });
+});
+
+
+
+$(".minus-cart-in-cart").click(function(){
+    var id = this.getAttribute("pid");
+    var ele = document.getElementById("quan" + id);
+    var qu2 = document.getElementById("qu2" + id);
+    var am = document.getElementById("subtotal" + id); // Unique subtotal ID for each product
+    var total = document.getElementById("total");
+
+    $.ajax({
+        type: 'GET',
+        url: '/minus',
+        data: {
+            prod_id: id,
+        },
+        success: function(dat) {
+            if (ele) {
+                ele.innerText = dat.quantity;
+                qu2.innerText = "Quantity :"+" "+ dat.quantity;
+            } else {
+                console.error("Quantity element not found for product ID: " + id);
+            }
+
+            if (am) {
+                am.innerText = "RS."+" "+ dat.subtotal; // Update subtotal for the specific product
+            } else {
+                console.error("Subtotal element not found.");
+            }
+
+            if (total) {
+                total.innerText = "RS."+" "+ dat.total;
+            } else {
+                console.error("Total element not found.");
+            }
+        }
+    });
+});
+</script>
+
+{% endblock body %}

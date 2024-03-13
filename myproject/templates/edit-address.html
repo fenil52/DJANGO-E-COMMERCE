@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<div class="container p-sm-5 p-3 px-4">
+    <div class="row py-5" id="edit-row">
+        <div class="col-md-10 col-10 m-auto">
+            <a href="/profile" class="text-decoration-none d-flex align-items-center arrow-a">
+                <box-icon name='chevron-left' id="address-arrow" class="me-3" color="#a43e3e" size="20px"></box-icon>
+                BACK TO ACCOUNT
+            </a>
+            <h2 class="edit-h2 py-4 pb-4">MY ADDRESSES</h2>
+
+            <!-- ===== form model ======= -->
+            <a href="#" class="text-decoration-none address-btn" id="address-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">ADD NEW ADDRESS</a>
+            <!-- ============= ADD NEW ADDDRESS FORM =============== -->
+
+            <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                <div class="modal-dialog border-0" id="exampleModal">
+                    <div class="modal-content border-0 rounded-0 p-3">
+
+                        <div class="modal-header justify-content-center border-0 p-5 pb-3">
+                            <h5 class="modal-title">Add a new address</h5>
+                            <button type="button" class="close bg-transparent border-0 rounded-0" data-bs-dismiss="modal">&times;</button>
+                        </div>
+
+                        <div class="modal-body text-center">
+                            <p class="modal-p">Please fill in the information below:</p>
+
+                            <!-- === form === -->
+
+                            <form method="post">
+                                {% csrf_token %}
+                                <!-- === first name ====  -->
+                                <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                    <input type="text" id="fname" class="edit-address-input" autocomplete="off" name="fname" required>
+                                    <label for="fname" class="edit-label pointer-event">First name</label>
+                                </div>
+
+                                <!-- === last name ====  -->
+                                <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                    <input type="text" id="lname" class="edit-address-input" autocomplete="off" name="lname" required>
+                                    <label for="lname" class="edit-label pointer-event">Last name</label>
+                                </div>
+
+                                <!-- === Phone ====  -->
+                                <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                    <input type="tel" minlength="10" maxlength="10" id="ph" class="edit-address-input" autocomplete="off" name="phone" pattern="[0-9]{10}" required>
+                                    <label for="ph" class="edit-label pointer-event">Phone</label>
+                                </div>
+
+                                <!-- === address ====  -->
+                                <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                    <input type="text" id="address" class="edit-address-input" autocomplete="off" name="address" required>
+                                    <label for="address" class="edit-label pointer-event">Address</label>
+                                </div>
+
+                                <!-- === city ====  -->
+                                <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                    <input type="text" id="city" class="edit-address-input" autocomplete="off" name="city" required>
+                                    <label for="city" class="edit-label pointer-event">City</label>
+                                </div>
+
+                                <!-- === state ====  -->
+                                <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                    <input type="text" id="state" class="edit-address-input" autocomplete="off" name="state" required>
+                                    <label for="state" class="edit-label pointer-event">State</label>
+                                </div>
+
+                                <!-- === state ====  -->
+                                <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                    <input type="text" id="zipcode" class="edit-address-input" autocomplete="off" name="zipcode" required>
+                                    <label for="zipcode" class="edit-label pointer-event">Zip Code</label>
+                                </div>
+
+                                <button type="submit" class="text-decoration-none address-btn w-75 my-5">ADD NEW ADDRESS</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- ===============================PRINT ADDRESS LOOP THROUGH ======================= -->
+        {% for addrid in address %}
+
+        <div class="col-md-3 m-auto col-10 mt-5 mt-md-0">
+            <p class="order-sec-p text-decoration-none">{{ forloop.counter }} Address</p>
+            <p class="address-name py-0 m-1 pb-1">{{ addrid.fname }} {{ addrid.lname }}</p>
+            <p class="address-name py-0 m-1 pb-1">{{ addrid.address }}</p>
+            <p class="address-name py-0 m-1 pb-1">{{ addrid.city }}</p>
+            <p class="address-name py-0 m-1 pb-1">{{ addrid.phone }}</p>
+            <p class="address-name py-0 pb-1 m-1">{{ addrid.state }}{{addrid.zipcode}}</p>
+            <p class="address-country">India</p>
+            <div class="btn-edit-delete d-flex gap-4">
+                <a href="" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#editmodal{{ addrid.id }}">Edit</a>
+
+                <!-- ============= EDIT ADDDRESS FORM =============== -->
+
+                <div class="modal" id="editmodal{{ addrid.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                    <div class="modal-dialog border-0" id="exampleModal">
+                        <div class="modal-content border-0 rounded-0 p-3">
+
+                            <div class="modal-header justify-content-center border-0 p-5 pb-3">
+                                <h5 class="modal-title">EDIT AN ADDRESS</h5>
+                                <button type="button" class="close bg-transparent border-0 rounded-0" data-bs-dismiss="modal">&times;</button>
+                            </div>
+
+                            <div class="modal-body text-center">
+                                <p class="modal-p">Please fill in the information below:</p>
+
+                                <!-- ============= EDIT ADDRESS FORM ================ -->
+
+                                <form method="post" action="{% url 'edit_address' addrid.id %}">
+                                    {% csrf_token %}
+                                    <!-- === first name ====  -->
+                                    <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                        <input type="text" id="fname" class="edit-address-input" autocomplete="off" value="{{ addrid.fname }}" name="fname" required>
+                                        <label for="fname" class="edit-label pointer-event">First name</label>
+                                    </div>
+
+                                    <!-- === last name ====  -->
+                                    <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                        <input type="text" id="lname" class="edit-address-input" autocomplete="off" value="{{ addrid.lname }}" name="lname" required>
+                                        <label for="lname" class="edit-label pointer-event">Last name</label>
+                                    </div>
+
+                                    <!-- === Phone ====  -->
+                                    <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                        <input type="tel" minlength="10" maxlength="10" id="ph" class="edit-address-input" autocomplete="off" name="phone" pattern="[0-9]{10}" value="{{ addrid.phone }}" required>
+                                        <label for="ph" class="edit-label pointer-event">Phone</label>
+                                    </div>
+
+                                    <!-- === address ====  -->
+                                    <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                        <input type="text" id="address" class="edit-address-input" autocomplete="off" value="{{ addrid.address }}" name="address" required>
+                                        <label for="address" class="edit-label pointer-event">Address</label>
+                                    </div>
+
+                                    <!-- === city ====  -->
+                                    <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                        <input type="text" id="city" class="edit-address-input" autocomplete="off" value="{{ addrid.city }}" name="city" required>
+                                        <label for="city" class="edit-label pointer-event">City</label>
+                                    </div>
+
+                                    <!-- === state ====  -->
+                                    <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                        <input type="text" id="state" class="edit-address-input" autocomplete="off" value="{{ addrid.state }}" name="state" required>
+                                        <label for="state" class="edit-label pointer-event">State</label>
+                                    </div>
+
+                                    <!-- === state ====  -->
+                                    <div class="input-container d-flex w-75 justify-content-center mx-auto mt-4">
+                                        <input type="text" id="zipcode" class="edit-address-input" autocomplete="off" value="{{ addrid.zipcode }}" name="zipcode" required>
+                                        <label for="zipcode" class="edit-label pointer-event">Zip Code</label>
+                                    </div>
+
+                                    <button type="submit" class="text-decoration-none address-btn w-75 my-5">SAVE CHANGES</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#deletemodal{{ addrid.id }}">Delete</a>
+
+              
+                <!-- Delete Modal -->
+<div class="modal" id="deletemodal{{ addrid.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog border-0" id="exampleModal">
+      <div class="modal-content border-0 rounded-0 p-3">
+          <div class="modal-header justify-content-between text-center border-0 p-3">
+              <h5 class="modal-title ms-sm-5 ms-1 text-center ps-sm-5">Confirm Deletion</h5>
+              <button type="button" class="close bg-transparent border-0 rounded-0" data-bs-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body text-center">
+              <p class="modal-p">Are you sure you want to delete this address?</p>
+              <!-- Additional styling and content can be added here -->
+          </div>
+          <div class="modal-footer justify-content-center border-0 p-3">
+              <form method="post" action="{% url 'delete_address' addrid.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Yes, Delete</button>
+              </form>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<hr>
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            var icon;
+            if ("{{ message.tags }}" === "error") {
+                icon = "error";
+            } else if ("{{ message.tags }}" === "success") {
+                icon = "success";
+            } else {
+                icon = "info";  // Default icon for other cases
+            }
+
+            Swal.fire({
+                title: "{{ message.tags }}",
+                text: "{{ message }}",
+                icon: icon,
+            });
+
+
+            Swal.fire({
+                title: "Thank You ..!",
+                text: "{{ message }}",
+                icon: icon,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp animate__faster',
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutDown animate__faster',
+                },
+            });
+
+        </script>
+    {% endfor %}
+{% endif %}
+
+{% endblock body %}
